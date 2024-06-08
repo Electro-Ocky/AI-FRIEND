@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animação com Tkinter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif; /* Definindo uma fonte padrão */
+        }
+
+        #phone {
+            width: 300px; /* Largura do "celular" */
+            height: 400px; /* Altura do "celular" */
+            border: 2px solid #ccc;
+            display: flex; /* Flex container para alinhar itens verticalmente */
+            flex-direction: column; /* Organiza os itens verticalmente */
+            justify-content: space-between; /* Espaço uniforme entre os itens */
+            padding: 10px; /* Espaçamento interno */
+            box-sizing: border-box; /* Garante que as bordas sejam consideradas no tamanho total */
+        }
+
+        #screen {
+            width: 100%; /* Largura da tela do "celular" */
+            height: 70%; /* Altura da tela do "celular" */
+            background-color: #ffffff; /* Cor do fundo da tela */
+            border: 1px solid #ccc;
+            overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
+            padding: 5px; /* Espaçamento interno */
+            box-sizing: border-box; /* Garante que as bordas sejam consideradas no tamanho total */
+            display: flex; /* Flex container para centralizar a imagem */
+            justify-content: center; /* Centraliza a imagem horizontalmente */
+            align-items: center; /* Centraliza a imagem verticalmente */
+        }
+
+        #character {
+            max-width: 100%; /* Garante que a imagem não ultrapasse o tamanho da tela */
+            max-height: 100%; /* Garante que a imagem não ultrapasse o tamanho da tela */
+        }
+
+        #text-area {
+            width: 100%; /* Largura da área de texto */
+            padding: 5px; /* Espaçamento interno */
+            box-sizing: border-box; /* Garante que as bordas sejam consideradas no tamanho total */
+            display: flex; /* Flex container para alinhar itens */
+            align-items: center; /* Centraliza os itens verticalmente */
+        }
+
+        #user-input {
+            flex: 1; /* Ocupa todo o espaço disponível */
+            margin-right: 5px; /* Espaçamento à direita do campo de entrada */
+            padding: 8px; /* Espaçamento interno */
+            box-sizing: border-box; /* Garante que o padding seja considerado no tamanho total */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #send-button {
+            padding: 8px; /* Espaçamento interno */
+            background-color: #4CAF50; /* Cor de fundo do botão */
+            color: white; /* Cor do texto do botão */
+            border: none; /* Remove a borda do botão */
+            border-radius: 5px; /* Borda arredondada */
+            cursor: pointer; /* Cursor de mão ao passar o mouse sobre o botão */
+            transition: background-color 0.3s; /* Transição suave da cor de fundo */
+        }
+
+        #send-button:hover {
+            background-color: #45a049; /* Cor de fundo do botão ao passar o mouse sobre ele */
+        }
+
+        #chat-area {
+            width: 100%; /* Largura da área de chat */
+            height: 20%; /* Altura da área de chat */
+            background-color: #f8f8f8; /* Cor de fundo da área de chat */
+            border: 1px solid #ccc;
+            overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
+            padding: 5px; /* Espaçamento interno */
+            box-sizing: border-box; /* Garante que as bordas sejam consideradas no tamanho total */
+        }
+
+        .message {
+            margin-bottom: 5px; /* Espaçamento entre as mensagens */
+        }
+
+        .user-message {
+            color: #4CAF50; /* Cor verde para mensagens do usuário */
+        }
+
+        .response-message {
+            color: #337ab7; /* Cor azul para mensagens de resposta */
+        }
+    </style>
+</head>
+<body>
+<div id="phone">
+    <div id="screen">
+        <img src="{{ url_for('static', filename='anime_character_neutral.png') }}" id="character">
+    </div>
+    <div id="text-area">
+        <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+        <button id="send-button" onclick="sendMessage()">Enviar</button>
+    </div>
+    <div id="chat-area">
+        <!-- Aqui serão exibidas as mensagens -->
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        var userInput = document.getElementById("user-input").value;
+        var chatArea = document.getElementById("chat-area");
+        var message = document.createElement("p");
+        message.className = "message user-message";
+        message.textContent = userInput;
+        chatArea.appendChild(message);
+        document.getElementById("user-input").value = "";
+        chatArea.scrollTop = chatArea.scrollHeight; // Rolagem automática para a última mensagem
+    }
+</script>
+</body>
+</html>
